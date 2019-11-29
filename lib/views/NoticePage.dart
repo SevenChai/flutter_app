@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/returnHomePage.dart';
+import '../components/BottomBar.dart';
 
 class NoticePage extends StatefulWidget{
   @override
@@ -19,6 +20,7 @@ class NoticePageState extends State<NoticePage>{
         height: 100,
         child: Text('Notice Page'),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

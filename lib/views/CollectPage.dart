@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/returnHomePage.dart';
+import '../components/BottomBar.dart';
 
 class CollectPage extends StatefulWidget{
   @override
@@ -19,6 +20,7 @@ class CollectPageState extends State<CollectPage>{
         height: 100,
         child: Text('Collect Page'),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

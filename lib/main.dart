@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.blue, // 更改主题
       ),
-      home: new Menus(),
+      home: new ListPage(),
       // 添加路由
       routes: <String, WidgetBuilder>{
         //页面
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Menus extends StatelessWidget {
+/*class Menus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _menus = [
@@ -103,7 +103,7 @@ class Menus extends StatelessWidget {
       body: Container(
           width: 200,
           child: ListView(children: _menuWid
-              /*children: <Widget>[
+              *//*children: <Widget>[
             RaisedButton(
               onPressed: () {
                 print(_menus[0]);
@@ -118,7 +118,7 @@ class Menus extends StatelessWidget {
               textColor: Colors.blue,
               child: Text('goto:' + _menus[1]),
             ),
-          ],*/
+          ],*//*
               )),
       floatingActionButton: SingleBtnPageBottom(),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -126,4 +126,4 @@ class Menus extends StatelessWidget {
       bottomNavigationBar: BottomBar(),
     );
   }
-}
+}*/

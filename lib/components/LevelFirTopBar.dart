@@ -13,15 +13,15 @@ import 'package:flutter/material.dart';
     ]);
   }
 }*/
-class ReturnToHome extends StatefulWidget {
+class LevelFirTopBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ReturnToHomeState();
+    return LevelFirTopBarState();
   }
 }
 
-class ReturnToHomeState extends State<ReturnToHome> {
+class LevelFirTopBarState extends State<LevelFirTopBar> {
   Choice _selectedChoice = choices[0]; // The app's "state".
   void _select(Choice choice) {
     setState(() {
@@ -35,13 +35,6 @@ class ReturnToHomeState extends State<ReturnToHome> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AppBar(
-      /*leading: Container(
-        width: 50.0,
-        height: 50.0,
-        child: Center(
-          child: Text('LOGO'),
-        ),
-      ),*/
       title: Text('子页面'),
       actions: <Widget>[
         /*new IconButton(

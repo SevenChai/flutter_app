@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/returnHomePage.dart';
+import '../components/BottomBar.dart';
 
 class AccountPage extends StatefulWidget{
   @override
@@ -19,6 +20,7 @@ class AccountPageState extends State<AccountPage>{
         height: 100,
         child: Text('Account Page'),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
