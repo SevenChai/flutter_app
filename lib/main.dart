@@ -10,7 +10,7 @@ import './widgets/IconClass.dart';
 import './components/pageBottom/SinglePageBottom.dart';
 import './components/BottomBar.dart';
 
-import './views/ListPage.dart';
+import './views/MainPage.dart';
 import './views/CollectPage.dart';
 import './views/NoticePage.dart';
 import './views/AccountPage.dart';

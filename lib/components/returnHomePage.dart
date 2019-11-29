@@ -42,7 +42,7 @@ class ReturnToHomeState extends State<ReturnToHome> {
           child: Text('LOGO'),
         ),
       ),*/
-      title: Text('子页面'),
+      title: Text('Demo Test'),
       actions: <Widget>[
         /*new IconButton(
             icon: new Icon(Icons.home),

@@ -13,17 +13,42 @@ class ListPage extends StatefulWidget {
 }
 
 class ListPageState extends State<ListPage> {
+  String _menuTitle = "";
+  void onDataChange(val){
+    print("======");
+    print(val.title);
+    this.setState((){
+      _menuTitle = val.title;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
       appBar: PreferredSize(
           child: ReturnToHome(), preferredSize: Size.fromHeight(50)),
-      body: Menus(),
+      body: _buildBody(),
       floatingActionButton: SingleBtnPageBottom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: BottomBar(),
+
+      //父子传值 - 1 - 父组件声明
+      bottomNavigationBar: BottomBar(data4Child: 'test', callback: (val)=>onDataChange(val),),
+
+
     );
+  }
+  Widget _buildBody(){
+    if(_menuTitle == "list"){
+      return Menus();
+    }else if(_menuTitle == "collect"){
+      return Collect();
+    }else if(_menuTitle == "notification"){
+      return Notification();
+    }else if(_menuTitle == "account"){
+      return Account();
+    }else{
+      return null;
+    }
   }
 }
 class Menus extends StatelessWidget {
@@ -75,3 +100,31 @@ class Menus extends StatelessWidget {
     ));
   }
 }
+class Collect extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('Collect Page');
+  }
+}
+class Notification extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('Notification Page');
+  }
+}
+class Account extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('Account Page');
+  }
+}
+/*class MenuBody extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+  }
+}*/

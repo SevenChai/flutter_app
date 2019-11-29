@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
+  //父子传值 - 1 - 子组件定义
+  BottomBar({ Key key, this.data4Child, this.callback }): super(key: key);
+  final callback;
+  String data4Child;
+
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -35,6 +41,10 @@ class BottomBarState extends State<BottomBar> {
                   changeSelect(m);
                   print(_selected);
                   print(_selected == m);
+
+                  //父子传值 - 1 - 子组件emit给父组件
+                  widget.callback(m);
+
                   //Navigator.of(context).pushReplacementNamed(m.path);
                 },
               ),
@@ -52,10 +62,10 @@ class Menu {
   final String path;
 }
 const List<Menu> menus = const <Menu>[
-  Menu(title: '列表', icon: Icons.list , path: '/listPage'),
-  Menu(title: '收藏', icon: Icons.favorite, path: '/collectPage' ),
-  Menu(title: '消息', icon: Icons.notifications, path: '/noticePage' ),
-  Menu(title: '账户', icon: Icons.account_box , path: '/accountPage'),
+  Menu(title: 'list', icon: Icons.list , path: '/listPage'),
+  Menu(title: 'collect', icon: Icons.favorite, path: '/collectPage' ),
+  Menu(title: 'notification', icon: Icons.notifications, path: '/noticePage' ),
+  Menu(title: 'account', icon: Icons.account_box , path: '/accountPage'),
 ];
 class MenuCard extends StatelessWidget{
   const MenuCard({ Key key, this.menu }) : super( key: key );
