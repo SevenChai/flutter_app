@@ -7,8 +7,8 @@ import './widgets/ColumnClass.dart';
 import './widgets/ImageClass.dart';
 import './widgets/TextClass.dart';
 import './widgets/IconClass.dart';
-import './components/pageBottom/SinglePageBottom.dart';
-import './components/BottomBar.dart';
+import './widgets/FormClass.dart';
+
 
 import './views/MainPage.dart';
 import './views/CollectPage.dart';
@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
         "/imageClass": (BuildContext context) => new ImageClassSevenor(),
         "/textClass": (BuildContext context) => new TextClassSevenor(),
         "/iconClass": (BuildContext context) => new IconClassSevenor(),
+        "/formClass": (BuildContext context) => new FormClassSevenor(),
       },
     );
   }

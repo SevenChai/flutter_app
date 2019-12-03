@@ -47,7 +47,7 @@ class ListPageState extends State<ListPage> {
     }else if(_menuTitle == "account"){
       return Account();
     }else{
-      return null;
+      return Menus();
     }
   }
 }
@@ -63,6 +63,7 @@ class Menus extends StatelessWidget {
       {'path': '/imageClass', 'name': 'Image Class'},
       {'path': '/textClass', 'name': 'Text Class'},
       {'path': '/iconClass', 'name': 'Icon Class'},
+      {'path': '/formClass', 'name': 'Form Class'},
     ];
     final _menuWid = _menus.map((m) {
       return new RaisedButton(
@@ -73,7 +74,7 @@ class Menus extends StatelessWidget {
           Navigator.of(context).pushNamed(m['path']);
         },
         textColor: Colors.blue,
-        child: Text('goto:' + m['name'] + 'test'),
+        child: Text(m['name']),
       );
     }).toList();
 
