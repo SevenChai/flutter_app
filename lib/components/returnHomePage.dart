@@ -56,6 +56,7 @@ class ReturnToHomeState extends State<ReturnToHome> {
           icon: new Icon(choices[0].icon),
           onPressed: () {
             _select(choices[0]);
+            //Navigator.pop(context);
           },
         ),
         new IconButton(

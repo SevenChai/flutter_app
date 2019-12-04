@@ -3,7 +3,6 @@ import '../components/returnHomePage.dart';
 import '../components/BottomBar.dart';
 import '../components/pageBottom/SinglePageBottom.dart';
 
-
 class ListPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -14,13 +13,14 @@ class ListPage extends StatefulWidget {
 
 class ListPageState extends State<ListPage> {
   String _menuTitle = "";
-  void onDataChange(val){
+  void onDataChange(val) {
     print("======");
     print(val.title);
-    this.setState((){
+    this.setState(() {
       _menuTitle = val.title;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -32,25 +32,28 @@ class ListPageState extends State<ListPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
       //父子传值 - 1 - 父组件声明
-      bottomNavigationBar: BottomBar(data4Child: 'test', callback: (val)=>onDataChange(val),),
-
-
+      bottomNavigationBar: BottomBar(
+        data4Child: 'test',
+        callback: (val) => onDataChange(val),
+      ),
     );
   }
-  Widget _buildBody(){
-    if(_menuTitle == "list"){
+
+  Widget _buildBody() {
+    if (_menuTitle == "list") {
       return Menus();
-    }else if(_menuTitle == "collect"){
+    } else if (_menuTitle == "collect") {
       return Collect();
-    }else if(_menuTitle == "notification"){
+    } else if (_menuTitle == "notification") {
       return Notification();
-    }else if(_menuTitle == "account"){
+    } else if (_menuTitle == "account") {
       return Account();
-    }else{
+    } else {
       return Menus();
     }
   }
 }
+
 class Menus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -64,9 +67,12 @@ class Menus extends StatelessWidget {
       {'path': '/textClass', 'name': 'Text Class'},
       {'path': '/iconClass', 'name': 'Icon Class'},
       {'path': '/formClass', 'name': 'Form Class'},
+      {'path': '/radioClass', 'name': 'Radio Class'},
+      {'path': '/cusRadioClass', 'name': 'Custom Radio Class'},
+      {'path': '/cusSwitchClass', 'name': 'Custom Switch Class'},
     ];
     final _menuWid = _menus.map((m) {
-      return new RaisedButton(
+      return RaisedButton(
         onPressed: () {
           print(m['path']);
           //pushReplacementNamed则是直接替换现在的页面，也就是说没有返回
@@ -80,42 +86,31 @@ class Menus extends StatelessWidget {
 
     // TODO: implement build
     return Container(
-    width: 200,
-    child: ListView(children: _menuWid
-    /*children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                print(_menus[0]);
-              },
-              textColor: Colors.blue,
-              child: Text('goto:' + _menus[0]),
-            ),
-            RaisedButton(
-              onPressed: () {
-                print(_menus[1]);
-              },
-              textColor: Colors.blue,
-              child: Text('goto:' + _menus[1]),
-            ),
-          ],*/
-    ));
+      width: 200,
+      child: ListView(
+        children: _menuWid,
+      ),
+    );
   }
 }
-class Collect extends StatelessWidget{
+
+class Collect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Text('Collect Page');
   }
 }
-class Notification extends StatelessWidget{
+
+class Notification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Text('Notification Page');
   }
 }
-class Account extends StatelessWidget{
+
+class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

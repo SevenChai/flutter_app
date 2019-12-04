@@ -8,6 +8,9 @@ import './widgets/ImageClass.dart';
 import './widgets/TextClass.dart';
 import './widgets/IconClass.dart';
 import './widgets/FormClass.dart';
+import './widgets/RadioClass.dart';
+import './widgets/CustomRadioClass.dart';
+import './widgets/CustomSwitchClass.dart';
 
 
 import './views/MainPage.dart';
@@ -64,6 +67,10 @@ class MyApp extends StatelessWidget {
         "/textClass": (BuildContext context) => new TextClassSevenor(),
         "/iconClass": (BuildContext context) => new IconClassSevenor(),
         "/formClass": (BuildContext context) => new FormClassSevenor(),
+        "/radioClass": (BuildContext context) => new RadioClassSevenor(),
+        "/cusRadioClass": (BuildContext context) => new CustomRadioClass(),
+        "/cusSwitchClass": (BuildContext context) => new CustomSwitchClass(),
+
       },
     );
   }
