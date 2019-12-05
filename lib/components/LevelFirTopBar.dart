@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 
-/*class ReturnToHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    void _pushSaved() {
-      Navigator.of(context).pushReplacementNamed('/');
-    }
-
-    // TODO: implement build
-    return AppBar(title: new Text('子页面'), actions: <Widget>[
-      new IconButton(icon: new Icon(Icons.home), onPressed: _pushSaved),
-    ]);
-  }
-}*/
 class LevelFirTopBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -35,7 +22,20 @@ class LevelFirTopBarState extends State<LevelFirTopBar> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AppBar(
-      title: Text('子页面'),
+      /*leading: Container(
+        width: 50.0,
+        height: 50.0,
+        child: Center(
+          child: Text('LOGO'),
+        ),
+      ),*/
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: new Icon(Icons.list),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        ),
+      ),
+      title: Text('Demo Test'),
       actions: <Widget>[
         /*new IconButton(
             icon: new Icon(Icons.home),
@@ -49,6 +49,7 @@ class LevelFirTopBarState extends State<LevelFirTopBar> {
           icon: new Icon(choices[0].icon),
           onPressed: () {
             _select(choices[0]);
+            //Navigator.pop(context);
           },
         ),
         new IconButton(
@@ -78,12 +79,12 @@ class Choice {
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Car', icon: Icons.directions_car),
-  const Choice(title: 'Bicycle', icon: Icons.directions_bike),
-  const Choice(title: 'Boat', icon: Icons.directions_boat),
-  const Choice(title: 'Bus', icon: Icons.directions_bus),
-  const Choice(title: 'Train', icon: Icons.directions_railway),
-  const Choice(title: 'Walk', icon: Icons.directions_walk),
+  const Choice(title: '', icon: null),
+  const Choice(title: 'Cart', icon: Icons.add_shopping_cart),
+  const Choice(title: '子页面1', icon: Icons.directions_boat),
+  const Choice(title: '子页面2', icon: Icons.directions_bus),
+  const Choice(title: '子页面3', icon: Icons.directions_railway),
+  const Choice(title: '子页面4', icon: Icons.directions_walk),
 ];
 
 class ChoiceCard extends StatelessWidget {

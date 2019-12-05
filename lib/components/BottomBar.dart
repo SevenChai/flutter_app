@@ -37,15 +37,18 @@ class BottomBarState extends State<BottomBar> {
                   color: _selected.title==m.title ? Colors.blue : Colors.grey,
                 ),
                 onPressed: () {
-                  print('here , here ');
-                  changeSelect(m);
-                  print(_selected);
-                  print(_selected == m);
+                  if(m.path != null){
+                    print('here , here ');
+                    changeSelect(m);
+                    print(_selected);
+                    print(_selected == m);
 
-                  //父子传值 - 1 - 子组件emit给父组件
-                  widget.callback(m);
+                    //父子传值 - 1 - 子组件emit给父组件
+                    widget.callback(m);
 
-                  //Navigator.of(context).pushReplacementNamed(m.path);
+                    //Navigator.of(context).pushReplacementNamed(m.path);
+                  }
+
                 },
               ),
             );
@@ -62,10 +65,11 @@ class Menu {
   final String path;
 }
 const List<Menu> menus = const <Menu>[
-  Menu(title: 'list', icon: Icons.list , path: '/listPage'),
-  Menu(title: 'collect', icon: Icons.favorite, path: '/collectPage' ),
+  Menu(title: 'list', icon: Icons.format_list_numbered_rtl , path: '/listPage'),
+  Menu(title: 'collect', icon: Icons.star, path: '/collectPage' ),
+  Menu(title: 'placeholder', icon: null, path: null ),
   Menu(title: 'notification', icon: Icons.notifications, path: '/noticePage' ),
-  Menu(title: 'account', icon: Icons.account_box , path: '/accountPage'),
+  Menu(title: 'account', icon: Icons.account_circle , path: '/accountPage'),
 ];
 class MenuCard extends StatelessWidget{
   const MenuCard({ Key key, this.menu }) : super( key: key );

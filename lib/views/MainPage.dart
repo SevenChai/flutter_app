@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/returnHomePage.dart';
+import '../components/LevelFirTopBar.dart';
 import '../components/BottomBar.dart';
 import '../components/pageBottom/SinglePageBottom.dart';
+import '../components/LeftMenu.dart';
 
 class ListPage extends StatefulWidget {
   @override
@@ -25,11 +26,12 @@ class ListPageState extends State<ListPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
+      drawer: LeftMenuClass(),
       appBar: PreferredSize(
-          child: ReturnToHome(), preferredSize: Size.fromHeight(50)),
+          child: LevelFirTopBar(), preferredSize: Size.fromHeight(50)),
       body: _buildBody(),
       floatingActionButton: SingleBtnPageBottom(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //浮动而不是
 
       //父子传值 - 1 - 父组件声明
       bottomNavigationBar: BottomBar(
@@ -58,21 +60,26 @@ class Menus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _menus = [
-      {'path': '/alignClass', 'name': 'Align Class'},
-      {'path': '/randomWords', 'name': 'Random Words'},
-      {'path': '/containerClass', 'name': 'Container Class'},
-      {'path': '/rowClass', 'name': 'Row Class'},
-      {'path': '/columnClass', 'name': 'Column Class'},
-      {'path': '/imageClass', 'name': 'Image Class'},
-      {'path': '/textClass', 'name': 'Text Class'},
-      {'path': '/iconClass', 'name': 'Icon Class'},
-      {'path': '/formClass', 'name': 'Form Class'},
-      {'path': '/radioClass', 'name': 'Radio Class'},
-      {'path': '/cusRadioClass', 'name': 'Custom Radio Class'},
-      {'path': '/cusSwitchClass', 'name': 'Custom Switch Class'},
+    Menu( '/alignClass', 'Align'),
+      /* {'path': '/randomWords',''Random Words'},*/
+      Menu( '/containerClass','Container'),
+      Menu( '/rowClass','Row'),
+      Menu( '/columnClass','Column'),
+      Menu( '/imageClass','Image'),
+      Menu( '/textClass','Text'),
+      Menu( '/iconClass','Icon'),
+      Menu( '/formClass','Form'),
+      Menu( '/radioClass','Radio'),
+      Menu( '/cusRadioClass','自定义Radio'),
+      Menu( '/cusSwitchClass','自定义Switch'),
+      Menu( '/dataTableClass','Table'),
+      Menu( '/panelListsClass','面板列表'),
+      Menu( '/chipClass','Chip'),
+      Menu( '/cardClass','Card'),
+
     ];
     final _menuWid = _menus.map((m) {
-      return RaisedButton(
+      /*return RaisedButton(
         onPressed: () {
           print(m['path']);
           //pushReplacementNamed则是直接替换现在的页面，也就是说没有返回
@@ -81,12 +88,20 @@ class Menus extends StatelessWidget {
         },
         textColor: Colors.blue,
         child: Text(m['name']),
+      );*/
+      return ListTile(
+        title: new Text(m.name, style: TextStyle(fontSize: 15.0)),
+        trailing: new Icon(
+          Icons.arrow_forward,
+        ),
+        onTap: () {
+          Navigator.of(context).pushNamed(m.path);
+        },
       );
     }).toList();
 
     // TODO: implement build
     return Container(
-      width: 200,
       child: ListView(
         children: _menuWid,
       ),
@@ -117,10 +132,12 @@ class Account extends StatelessWidget {
     return Text('Account Page');
   }
 }
-/*class MenuBody extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
 
-  }
-}*/
+class Menu {
+  final String name;
+  final String path;
+  Menu(
+      this.path,
+      this.name,
+  );
+}

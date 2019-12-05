@@ -11,6 +11,10 @@ import './widgets/FormClass.dart';
 import './widgets/RadioClass.dart';
 import './widgets/CustomRadioClass.dart';
 import './widgets/CustomSwitchClass.dart';
+import './components/RandomPanelLists.dart';
+import './widgets/ChipClass.dart';
+import './widgets/DataTableClass.dart';
+import './widgets/cardClass.dart';
 
 
 import './views/MainPage.dart';
@@ -70,7 +74,10 @@ class MyApp extends StatelessWidget {
         "/radioClass": (BuildContext context) => new RadioClassSevenor(),
         "/cusRadioClass": (BuildContext context) => new CustomRadioClass(),
         "/cusSwitchClass": (BuildContext context) => new CustomSwitchClass(),
-
+        "/panelListsClass": (BuildContext context) => new RandomPanelListsClass(),
+        "/chipClass": (BuildContext context) => new ChipClassSevenor(),
+        "/dataTableClass": (BuildContext context) => new DataTableClassSevenor(),
+        "/cardClass": (BuildContext context) => new CardClassSevenor(),
       },
     );
   }
