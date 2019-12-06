@@ -62,7 +62,7 @@ class CustomSwitchState extends State<CustomSwitchClass> {
     return new Scaffold(
       appBar: PreferredSize(
           child: ReturnToHome(), preferredSize: Size.fromHeight(50)),
-      body: Center(
+      body: Container(
         child: CustomSwitch(
           label: 'Cus Switch',
           padding: EdgeInsets.symmetric(horizontal: 5.0),

@@ -13,9 +13,12 @@ class SingleBtnPageBottomState extends State<SingleBtnPageBottom> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return FloatingActionButton(
-      onPressed: () {},
-      tooltip: 'add button',
-      child: Icon(Icons.add),
+      onPressed: () {
+        //跳转到登录页面
+        Navigator.of(context).pushNamed('/register');
+      },
+      tooltip: 'Register',
+      child: Text('登录'),
     );
   }
 }

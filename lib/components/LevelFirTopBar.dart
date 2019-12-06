@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LevelFirTopBar extends StatefulWidget {
+  LevelFirTopBar({Key key, this.menuTitle}) : super(key: key);
+  String menuTitle;
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,6 +19,23 @@ class LevelFirTopBarState extends State<LevelFirTopBar> {
       _selectedChoice = choice;
       print(_selectedChoice.title);
     });
+  }
+
+  String _menuTitleStr = "flutter小组件";
+  List<String> _menuTitleLists = ['flutter小组件', '收藏中心', '消息中心', '账户中心'];
+  _getMenuCh() {
+    if (widget.menuTitle == "list" || widget.menuTitle == "") {
+      return _menuTitleLists[0];
+    }
+    if (widget.menuTitle == "collect") {
+      return _menuTitleLists[1];
+    }
+    if (widget.menuTitle == "notification") {
+      return _menuTitleLists[2];
+    }
+    if (widget.menuTitle == "account") {
+      return _menuTitleLists[3];
+    }
   }
 
   @override
@@ -35,7 +55,7 @@ class LevelFirTopBarState extends State<LevelFirTopBar> {
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
-      title: Text('Demo Test'),
+      title: Text(_getMenuCh()),
       actions: <Widget>[
         /*new IconButton(
             icon: new Icon(Icons.home),

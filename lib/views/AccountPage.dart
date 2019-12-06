@@ -13,14 +13,6 @@ class AccountPageState extends State<AccountPage>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
-      appBar: PreferredSize(
-          child: ReturnToHome(), preferredSize: Size.fromHeight(50)),
-      body: Container(
-        height: 100,
-        child: Text('Account Page'),
-      ),
-      bottomNavigationBar: BottomBar(),
-    );
+    return Text('Account 胜多负少Page');
   }
 }

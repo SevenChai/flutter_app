@@ -51,7 +51,7 @@ class ReturnToHomeState extends State<ReturnToHome> {
               //没有返回按钮
               Navigator.of(context).pushNamed('/');
             }),*/
-        new IconButton(
+        /*new IconButton(
           // action button
           icon: new Icon(choices[0].icon),
           onPressed: () {
@@ -73,7 +73,7 @@ class ReturnToHomeState extends State<ReturnToHome> {
                 return new PopupMenuItem<Choice>(
                     value: choice, child: Text(choice.title));
               }).toList();
-            })
+            })*/
       ],
     );
   }

@@ -14,13 +14,13 @@ import './widgets/CustomSwitchClass.dart';
 import './components/RandomPanelLists.dart';
 import './widgets/ChipClass.dart';
 import './widgets/DataTableClass.dart';
-import './widgets/cardClass.dart';
-
+import './widgets/CardClass.dart';
+import './widgets/ProgressClass.dart';
+import './widgets/ListTitleClass.dart';
+import './widgets/StepperClass.dart';
 
 import './views/MainPage.dart';
-import './views/CollectPage.dart';
-import './views/NoticePage.dart';
-import './views/AccountPage.dart';
+import './views/RegisterPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -54,10 +54,11 @@ class MyApp extends StatelessWidget {
       // 添加路由
       routes: <String, WidgetBuilder>{
         //页面
-        "/listPage": (BuildContext context) => new ListPage(),
+       /* "/listPage": (BuildContext context) => new ListPage(),
         "/collectPage": (BuildContext context) => new CollectPage(),
         "/noticePage": (BuildContext context) => new NoticePage(),
-        "/accountPage": (BuildContext context) => new AccountPage(),
+        "/accountPage": (BuildContext context) => new AccountPage(),*/
+        "/register": (BuildContext context) => new RegisterClass(),
 
         //Class Widget
         "/alignClass": (BuildContext context) =>
@@ -78,6 +79,9 @@ class MyApp extends StatelessWidget {
         "/chipClass": (BuildContext context) => new ChipClassSevenor(),
         "/dataTableClass": (BuildContext context) => new DataTableClassSevenor(),
         "/cardClass": (BuildContext context) => new CardClassSevenor(),
+        "/listTitleClass": (BuildContext context) => new ListTitleClassSevenor(),
+        "/progressClass": (BuildContext context) => new ProgressClassSevenor(),
+        "/stepperClass": (BuildContext context) => new StepperClassSevenor(),
       },
     );
   }
