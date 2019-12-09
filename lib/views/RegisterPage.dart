@@ -35,51 +35,53 @@ class RegisterState extends State<RegisterClass> {
     return new Scaffold(
       appBar: PreferredSize(
           child: RegOrLogTopBar(), preferredSize: Size.fromHeight(50)),
-      body: Container(
-        //color: Color.fromRGBO(200, 200, 200, 0.5),
-        child: Padding(
-          padding: EdgeInsets.all( 10.0 ),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: <Widget>[
-                Row(
+      body: SingleChildScrollView(
+        child: Container(
+          //color: Color.fromRGBO(200, 200, 200, 0.5),
+          child: Padding(
+              padding: EdgeInsets.all( 10.0 ),
+              child: Container(
+                color: Colors.white,
+                child: Column(
                   children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        color: _defAction == actions[0] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
-                        child: FlatButton(onPressed: (){
-                          _changeAction(actions[0]);
-                        }, child: Text('登录', style: _btnStyle,)),
-                      ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            color: _defAction == actions[0] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
+                            child: FlatButton(onPressed: (){
+                              _changeAction(actions[0]);
+                            }, child: Text('登录', style: _btnStyle,)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            color: _defAction == actions[1] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
+                            child: FlatButton(onPressed: (){
+                              _changeAction(actions[1]);
+                            }, child: Text('注册', style: _btnStyle,)),
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Container(
-                        color: _defAction == actions[1] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
-                        child: FlatButton(onPressed: (){
-                          _changeAction(actions[1]);
-                        }, child: Text('注册', style: _btnStyle,)),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Form(
+                        key: _formkey,
+                        child: new Builder(
+                          builder: (BuildContext context) {
+                            return _RegisterForm(context);
+                          },
+                        ),
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Form(
-                    key: _formkey,
-                    child: new Builder(
-                      builder: (BuildContext context) {
-                        return _RegisterForm(context);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-          /*child: */
+              )
+            /*child: */
+          ),
         ),
-      ),
+      )
     );
   }
 

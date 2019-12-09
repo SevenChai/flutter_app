@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
 import './demos/RandomWordDemo.dart';
 import './widgets/AlignClass.dart';
 import './widgets/ContainerClass.dart';
@@ -18,11 +20,19 @@ import './widgets/CardClass.dart';
 import './widgets/ProgressClass.dart';
 import './widgets/ListTitleClass.dart';
 import './widgets/StepperClass.dart';
+import './widgets/AnimationClass.dart';
+import './widgets/HorizScrollClass.dart';
 
 import './views/MainPage.dart';
 import './views/RegisterPage.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  //debugPaintSizeEnabled = true;
+  //debugPaintPointersEnabled = true;
+  //debugPaintLayerBordersEnabled = true;
+  //debugRepaintRainbowEnabled = true;
+  return runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -54,7 +64,7 @@ class MyApp extends StatelessWidget {
       // 添加路由
       routes: <String, WidgetBuilder>{
         //页面
-       /* "/listPage": (BuildContext context) => new ListPage(),
+        /* "/listPage": (BuildContext context) => new ListPage(),
         "/collectPage": (BuildContext context) => new CollectPage(),
         "/noticePage": (BuildContext context) => new NoticePage(),
         "/accountPage": (BuildContext context) => new AccountPage(),*/
@@ -75,13 +85,18 @@ class MyApp extends StatelessWidget {
         "/radioClass": (BuildContext context) => new RadioClassSevenor(),
         "/cusRadioClass": (BuildContext context) => new CustomRadioClass(),
         "/cusSwitchClass": (BuildContext context) => new CustomSwitchClass(),
-        "/panelListsClass": (BuildContext context) => new RandomPanelListsClass(),
+        "/panelListsClass": (BuildContext context) =>
+            new RandomPanelListsClass(),
         "/chipClass": (BuildContext context) => new ChipClassSevenor(),
-        "/dataTableClass": (BuildContext context) => new DataTableClassSevenor(),
+        "/dataTableClass": (BuildContext context) =>
+            new DataTableClassSevenor(),
         "/cardClass": (BuildContext context) => new CardClassSevenor(),
-        "/listTitleClass": (BuildContext context) => new ListTitleClassSevenor(),
+        "/listTitleClass": (BuildContext context) =>
+            new ListTitleClassSevenor(),
         "/progressClass": (BuildContext context) => new ProgressClassSevenor(),
         "/stepperClass": (BuildContext context) => new StepperClassSevenor(),
+        "/animationClass": (BuildContext context) => new AnimationClassSevenor(),
+        "/horizScrollClass": (BuildContext context) => new HorizScrollClassSevenor(),
       },
     );
   }
@@ -122,7 +137,7 @@ class MyApp extends StatelessWidget {
       body: Container(
           width: 200,
           child: ListView(children: _menuWid
-              *//*children: <Widget>[
+              */ /*children: <Widget>[
             RaisedButton(
               onPressed: () {
                 print(_menus[0]);
@@ -137,7 +152,7 @@ class MyApp extends StatelessWidget {
               textColor: Colors.blue,
               child: Text('goto:' + _menus[1]),
             ),
-          ],*//*
+          ],*/ /*
               )),
       floatingActionButton: SingleBtnPageBottom(),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

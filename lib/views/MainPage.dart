@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../components/LevelFirTopBar.dart';
 import '../components/BottomBar.dart';
 import '../components/pageBottom/SinglePageBottom.dart';
@@ -86,6 +87,8 @@ class Menus extends StatelessWidget {
       Menu('/listTitleClass', '各种标题卡片'),
       Menu('/progressClass', '进度条'),
       Menu('/stepperClass', 'Stepper'),
+      Menu('/animationClass', '动画'),
+      Menu('/horizScrollClass', '水平滑动条'),
 
     ];
     final _menuWid = _menus.map((m) {
