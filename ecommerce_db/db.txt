@@ -1,0 +1,87 @@
+CREATE TABLE
+IF NOT EXISTS `users` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`name` VARCHAR (100),
+	`phone` VARCHAR (20) NOT NULL,
+	`idCard` VARCHAR (50),
+	`createdTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE
+IF NOT EXISTS `goods` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`name` VARCHAR (100),
+	`price` DOUBLE,
+	`storeId` INT,
+	`producerId` INT,
+	`imgUrls` VARCHAR (500),
+	`description` VARCHAR (500),
+	`dispatch` VARCHAR (100),
+	`evaluatedId` INT,
+	`evaluatedNum` INT,
+	`createdTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE
+IF NOT EXISTS `orders` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`userId` INT,
+	`goodId` INT,
+	`addressId` INT,
+	`storeId` INT,
+	`evaluatedId` INT,
+	`comment` VARCHAR (500),
+	`status` VARCHAR (100),
+	`goodName` VARCHAR (100),
+	`goodPrice` DOUBLE,
+	`buyNum` INT,
+	`goodImg` VARCHAR (500),
+	`createdTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE
+IF NOT EXISTS `address` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`userId` INT,
+	`province` VARCHAR (50),
+	`city` VARCHAR (50),
+	`country` VARCHAR (50),
+	`address` VARCHAR (100),
+	`name` VARCHAR (100),
+	`sex` VARCHAR (10),
+	`phone` VARCHAR (20),
+	`isDefault` VARCHAR (10),
+	`createdTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE
+IF NOT EXISTS `carts` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`userId` INT,
+	`goodId` INT,
+	`goodName` VARCHAR (100),
+	`goodPrice` DOUBLE,
+	`goodImg` VARCHAR (500),
+	`buyNum` INT,
+	`status` VARCHAR (100),
+	`createdTime` DATE,
+	`updateTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE
+IF NOT EXISTS `evaluation` (
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`userId` INT,
+	`goodId` INT,
+	`content` VARCHAR (500),
+	`evaluatedImgUrls` VARCHAR (500),
+	`evaluatedImgNum` INT,
+	`userEvaNum` INT,
+	`createdTime` DATE,
+	PRIMARY KEY (`id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
