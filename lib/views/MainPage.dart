@@ -5,7 +5,7 @@ import '../components/BottomBar.dart';
 import '../components/pageBottom/SinglePageBottom.dart';
 import '../components/LeftMenu.dart';
 
-import '../views/CollectPage.dart';
+import 'package:flutter_app/views/collect/CollectPage.dart';
 import '../views/NoticePage.dart';
 import '../views/AccountPage.dart';
 

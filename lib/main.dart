@@ -25,6 +25,7 @@ import './widgets/HorizScrollClass.dart';
 
 import './views/MainPage.dart';
 import './views/RegisterPage.dart';
+import './views/collect/BookClass.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         "/noticePage": (BuildContext context) => new NoticePage(),
         "/accountPage": (BuildContext context) => new AccountPage(),*/
         "/register": (BuildContext context) => new RegisterClass(),
+        "/bookDetailClass": (BuildContext context) => new BookIntroClass(),
 
         //Class Widget
         "/alignClass": (BuildContext context) =>
@@ -97,6 +99,7 @@ class MyApp extends StatelessWidget {
         "/stepperClass": (BuildContext context) => new StepperClassSevenor(),
         "/animationClass": (BuildContext context) => new AnimationClassSevenor(),
         "/horizScrollClass": (BuildContext context) => new HorizScrollClassSevenor(),
+
       },
     );
   }

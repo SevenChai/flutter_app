@@ -309,7 +309,8 @@ class RegisterState extends State<RegisterClass> {
                 }, child: Text('跳过，点进去看看', style: TextStyle(
                     color: Colors.blue,
                     fontSize: 16,
-                    //decoration:
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline
                 ),)),
               ),
             )
