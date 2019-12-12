@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import '../demos/MainData.dart';
+import '../services/CartStore.dart';
+import '../services/LoginStore.dart';
+import '../components/LoadingDialog.dart';
 
 class LevelFirTopBar extends StatefulWidget {
   LevelFirTopBar({Key key, this.menuTitle}) : super(key: key);
@@ -12,6 +17,8 @@ class LevelFirTopBar extends StatefulWidget {
 }
 
 class LevelFirTopBarState extends State<LevelFirTopBar> {
+  var _cartStoreOn;
+  int cartNum = 3;
   Choice _selectedChoice = choices[0]; // The app's "state".
   void _select(Choice choice) {
     setState(() {
@@ -38,57 +45,130 @@ class LevelFirTopBarState extends State<LevelFirTopBar> {
     }
   }
 
+  bool _isShowDialog = false;
+  void _showLoading(String msg) {
+    /// 避免重复弹出
+    if (mounted && !_isShowDialog){
+      _isShowDialog = true;
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder:(_) {
+            return WillPopScope(
+              onWillPop: () async {
+                // 拦截到返回键，证明dialog被手动关闭
+                _isShowDialog = false;
+                return Future.value(true);
+              },
+              child: LoadingDialog(text: msg),
+            );
+          }
+      );
+    }
+  }
+  void _hideLoading() {
+    Navigator.pop(context);
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return AppBar(
-      /*leading: Container(
+    return ShareDataWidget(
+      child: AppBar(
+        /*leading: Container(
         width: 50.0,
         height: 50.0,
         child: Center(
           child: Text('LOGO'),
         ),
       ),*/
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: new Icon(Icons.list),
-          onPressed: () => Scaffold.of(context).openDrawer(),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Icons.list),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
         ),
-      ),
-      title: Text(_getMenuCh()),
-      actions: <Widget>[
-        /*new IconButton(
+        title: Text(_getMenuCh()),
+        actions: <Widget>[
+          /*new IconButton(
             icon: new Icon(Icons.home),
             onPressed: () {
               print('go home');
               //没有返回按钮
               Navigator.of(context).pushNamed('/');
             }),*/
-        new IconButton(
-          // action button
-          icon: new Icon(choices[0].icon),
-          onPressed: () {
-            _select(choices[0]);
-            //Navigator.pop(context);
-          },
-        ),
-        new IconButton(
-          // action button
-          icon: new Icon(choices[1].icon),
-          onPressed: () {
-            _select(choices[1]);
-          },
-        ),
-        new PopupMenuButton<Choice>(
-            onSelected: _select,
-            itemBuilder: (BuildContext context) {
-              return choices.skip(2).map((Choice choice) {
-                return new PopupMenuItem<Choice>(
-                    value: choice, child: Text(choice.title));
-              }).toList();
-            })
-      ],
+          Center(
+            child: ShareDataWidget.getData(context).isLogin ? Text('Admin') : Text(''),
+          ),
+          ShareDataWidget.getData(context).isLogin ? Center(
+            child: Row(
+              children: <Widget>[
+                new IconButton(
+                  iconSize: 20.0,
+                  padding: EdgeInsets.only(left: 20.0),
+                  icon: new Icon(choices[1].icon),
+                  disabledColor: Colors.red,
+                  onPressed: null,
+                ),
+                Text("(${ cartNum })", style: TextStyle(color: Colors.red),),
+              ],
+            ),
+          ) : Center(
+            child: Row(
+              children: <Widget>[
+                FlatButton(
+                  child: Text("快捷登录"),
+                  onPressed: (){
+                    _showLoading("快捷登录中...");
+                    Timer(Duration(seconds: 2), (){
+                      //隐藏dialog
+                      _hideLoading();
+                      loginEventBus.fire(LoginStore(true, "seven"));
+                    });
+
+                  },
+                ),
+              ],
+            ),
+          ),
+          new PopupMenuButton<Choice>(
+              onSelected: _select,
+              itemBuilder: (BuildContext context) {
+                return choices.skip(2).map((Choice choice) {
+                  return new PopupMenuItem<Choice>(
+                      value: choice, child: Text(choice.title));
+                }).toList();
+              })
+        ],
+      ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this._cartStoreOn = cartEventBus.on<CartStore>().listen((event){
+      if(event.action == "add"){
+        setState(() {
+          cartNum ++;
+        });
+      }
+
+    });
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
+    //如果build中没有依赖InheritedWidget，则此回调不会被调用。
+    //ShareDataWidget.getData(context).data.toString()
+    print("didChangeDependencies = " );
+  }
+  @override
+  void dispose() {
+    this._cartStoreOn.cancel();
+    // TODO: implement dispose
+    super.dispose();
   }
 }
 

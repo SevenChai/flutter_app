@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../Model/Book.dart';
 import '../../components/returnHomePage.dart';
+import '../../services/CartStore.dart';
 
 class CollectPage extends StatefulWidget {
   @override
@@ -17,8 +18,16 @@ class CollectPageState extends State<CollectPage> {
         '莫泊桑',
         '以1870—1871年普法战争为背景。通过代表当时法国社会各阶层的10个人同乘一辆马车逃往一个港口的故事，形象地反映出资产阶级在这场战争中所表现出的卑鄙自私和出卖人民的丑恶嘴脸。',
         'assets/imgs/BALL of FAT.jpg'),
-    Book('包法利夫人', '列夫托尔斯泰', '作品讲述的是一个受过贵族化教育的农家女爱玛的故事。她瞧不起当乡镇医生的丈夫包法利，梦想着传奇式的爱情。可是她的两度偷情非但没有给她带来幸福，却使她自己成为高利贷者盘剥的对象。最后她积债如山，走投无路，只好服毒自尽。', 'assets/imgs/Emma bovary.jpg'),
-    Book('茶花女', '小仲马', '故事讲述了一个青年人与巴黎上流社会一位交际花曲折凄婉的爱情故事。作品通过一个妓女的爱情悲剧，揭露了法国七月王朝上流社会的糜烂生活。对贵族资产阶级的虚伪道德提出了血泪控诉。', 'assets/imgs/La Traviata.jpg'),
+    Book(
+        '包法利夫人',
+        '列夫托尔斯泰',
+        '作品讲述的是一个受过贵族化教育的农家女爱玛的故事。她瞧不起当乡镇医生的丈夫包法利，梦想着传奇式的爱情。可是她的两度偷情非但没有给她带来幸福，却使她自己成为高利贷者盘剥的对象。最后她积债如山，走投无路，只好服毒自尽。',
+        'assets/imgs/Emma bovary.jpg'),
+    Book(
+        '茶花女',
+        '小仲马',
+        '故事讲述了一个青年人与巴黎上流社会一位交际花曲折凄婉的爱情故事。作品通过一个妓女的爱情悲剧，揭露了法国七月王朝上流社会的糜烂生活。对贵族资产阶级的虚伪道德提出了血泪控诉。',
+        'assets/imgs/La Traviata.jpg'),
   ];
   void _removeCollect(Book book) {
     //移除这本书
@@ -26,12 +35,30 @@ class CollectPageState extends State<CollectPage> {
       _books.remove(book);
     });
   }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return BookList(
-      books: _books,
+    return Column(
+      children: <Widget>[
+        /*Container(
+          height: 50,
+          child: ShareDataWidget(
+            child: Row(
+              children: <Widget>[
+                FlatButton.icon(
+                    onPressed: null,
+                    icon: Icon(Icons.audiotrack),
+                    label: Text("是否登录？：" )),
+              ],
+            ),
+          ),
+        ),*/
+        Expanded(
+          child: BookList(
+            books: _books,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -90,7 +117,10 @@ class BookList extends StatelessWidget {
                       ),
                       //color: Colors.blueGrey,
                     ),
-                  )
+                  ),
+                  IconButton(tooltip: "加入购物车", icon: Icon(Icons.add_circle_outline), color: Colors.grey, onPressed: (){
+                    cartEventBus.fire(CartStore("add", books[index].name));
+                  }),
                 ],
               ),
               ListTile(
@@ -103,7 +133,11 @@ class BookList extends StatelessWidget {
                     ),
                   ),
                   title: Text('作者：book.author'),
-                  subtitle: Text('${books[index].desc}', maxLines: 2, overflow: TextOverflow.ellipsis, ),
+                  subtitle: Text(
+                    '${books[index].desc}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   trailing: Container(
                     width: 20.0,
                     child: IconButton(

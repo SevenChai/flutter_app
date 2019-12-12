@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/RegOrLogTopBar.dart';
+import '../demos/MainData.dart';
 
 class RegisterClass extends StatefulWidget {
   @override
@@ -19,11 +20,12 @@ class RegisterState extends State<RegisterClass> {
 
   List<String> actions = ['login', 'register'];
   String _defAction = 'login';
-  void _changeAction(String action){
+  void _changeAction(String action) {
     setState(() {
       _defAction = action;
     });
   }
+
   final _formkey = GlobalKey<FormState>();
   String _phone = "";
   String _pwd = "";
@@ -31,58 +33,88 @@ class RegisterState extends State<RegisterClass> {
   String _province = "北京市";
   @override
   Widget build(BuildContext context) {
+    bool isLogin = false;
+    dynamic routerParams = ModalRoute.of(context).settings.arguments;
+    if (routerParams != null && routerParams["isLogin"] != null) {
+      isLogin = routerParams["isLogin"];
+    }
     // TODO: implement build
-    return new Scaffold(
-      appBar: PreferredSize(
-          child: RegOrLogTopBar(), preferredSize: Size.fromHeight(50)),
-      body: SingleChildScrollView(
-        child: Container(
-          //color: Color.fromRGBO(200, 200, 200, 0.5),
-          child: Padding(
-              padding: EdgeInsets.all( 10.0 ),
+    return isLogin
+        ? Container(
+            color: Colors.blue,
+            child: FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "您已登录，点击进入系统",
+                  style: TextStyle(color: Colors.white, decoration: TextDecoration.underline),
+                )),
+          )
+        : Scaffold(
+            appBar: PreferredSize(
+                child: RegOrLogTopBar(), preferredSize: Size.fromHeight(50)),
+            body: SingleChildScrollView(
               child: Container(
-                color: Colors.white,
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            color: _defAction == actions[0] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
-                            child: FlatButton(onPressed: (){
-                              _changeAction(actions[0]);
-                            }, child: Text('登录', style: _btnStyle,)),
+                //color: Color.fromRGBO(200, 200, 200, 0.5),
+                child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  color: _defAction == actions[0]
+                                      ? Colors.blue
+                                      : Color.fromRGBO(200, 200, 200, 0.5),
+                                  child: FlatButton(
+                                      onPressed: () {
+                                        _changeAction(actions[0]);
+                                      },
+                                      child: Text(
+                                        '登录',
+                                        style: _btnStyle,
+                                      )),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  color: _defAction == actions[1]
+                                      ? Colors.blue
+                                      : Color.fromRGBO(200, 200, 200, 0.5),
+                                  child: FlatButton(
+                                      onPressed: () {
+                                        _changeAction(actions[1]);
+                                      },
+                                      child: Text(
+                                        '注册',
+                                        style: _btnStyle,
+                                      )),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: _defAction == actions[1] ? Colors.blue : Color.fromRGBO(200, 200, 200, 0.5),
-                            child: FlatButton(onPressed: (){
-                              _changeAction(actions[1]);
-                            }, child: Text('注册', style: _btnStyle,)),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0),
+                            child: Form(
+                              key: _formkey,
+                              child: new Builder(
+                                builder: (BuildContext context) {
+                                  return _RegisterForm(context);
+                                },
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: Form(
-                        key: _formkey,
-                        child: new Builder(
-                          builder: (BuildContext context) {
-                            return _RegisterForm(context);
-                          },
-                        ),
+                        ],
                       ),
+                    )
+                    /*child: */
                     ),
-                  ],
-                ),
-              )
-            /*child: */
-          ),
-        ),
-      )
-    );
+              ),
+            ));
   }
 
   Widget _RegisterForm(BuildContext context) {
@@ -92,7 +124,11 @@ class RegisterState extends State<RegisterClass> {
         Row(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(right: 10.0, top: 0.0, bottom: 0.0, ),
+                padding: EdgeInsets.only(
+                  right: 10.0,
+                  top: 0.0,
+                  bottom: 0.0,
+                ),
                 child: Container(
                   child: Align(
                     alignment: Alignment.center,
@@ -143,7 +179,11 @@ class RegisterState extends State<RegisterClass> {
         Row(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(right: 10.0, top: 0.0, bottom: 0.0, ),
+                padding: EdgeInsets.only(
+                  right: 10.0,
+                  top: 0.0,
+                  bottom: 0.0,
+                ),
                 child: Container(
                   child: Align(
                     alignment: Alignment.center,
@@ -173,10 +213,10 @@ class RegisterState extends State<RegisterClass> {
                     if (value.isEmpty) {
                       return '密码不能为空';
                     }
-                    if(value.length<6){
+                    if (value.length < 6) {
                       return "请输入6-10位密码";
                     }
-                    if(value.length>10){
+                    if (value.length > 10) {
                       return "请输入6-10位密码";
                     }
                     setState(() {
@@ -189,93 +229,101 @@ class RegisterState extends State<RegisterClass> {
             )
           ],
         ),
-        _defAction==actions[1] ? Row(
-          children: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right: 10.0),
-                child: Container(
-                  child: Center(
-                    child: Text('性别'),
+        _defAction == actions[1]
+            ? Row(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Container(
+                        child: Center(
+                          child: Text('性别'),
+                        ),
+                        width: 60,
+                      )),
+                  Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Text('男'),
                   ),
-                  width: 60,
-                )),
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Text('男'),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Radio(
-                value: SingingCharacter.male,
-                groupValue: _gender,
-                onChanged: (SingingCharacter val) {
-                  setState(() {
-                    _gender = val;
-                  });
-                },
+                  Padding(
+                    padding: EdgeInsets.only(right: 10.0),
+                    child: Radio(
+                      value: SingingCharacter.male,
+                      groupValue: _gender,
+                      onChanged: (SingingCharacter val) {
+                        setState(() {
+                          _gender = val;
+                        });
+                      },
+                    ),
+                  ),
+                  Text('女'),
+                  Radio(
+                    value: SingingCharacter.female,
+                    groupValue: _gender,
+                    onChanged: (SingingCharacter val) {
+                      setState(() {
+                        _gender = val;
+                      });
+                    },
+                  ),
+                ],
+              )
+            : Container(
+                height: 0.0,
               ),
-            ),
-            Text('女'),
-            Radio(
-              value: SingingCharacter.female,
-              groupValue: _gender,
-              onChanged: (SingingCharacter val) {
-                setState(() {
-                  _gender = val;
-                });
-              },
-            ),
-          ],
-        ) : Container(height: 0.0,),
-        _defAction==actions[1] ? Row(
-          children: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(right: 10.0),
-                child: Container(
-                  child: Center(
-                    child: Text('地址'),
-                  ),
-                  width: 60,
-                )),
-            Expanded(
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  items: [
-                    DropdownMenuItem(
-                      child: Text('==请选择=='),
-                      value: "",
-                    ),
-                    DropdownMenuItem(
-                      child: Text('北京市'),
-                      value: "北京市",
-                    ),
-                    DropdownMenuItem(
-                      child: Text('上海市'),
-                      value: "上海市",
-                    )
-                  ],
-                  hint: Text('请选择省份'),
-                  onChanged: (String val) {
-                    setState(() {
-                      _province = val;
-                    });
-                  },
-                  value: _province,
-                  //减少按钮的高度。
-                  // 默认情况下，此按钮的高度与其菜单项的高度相同。
-                  // 如果isDense为true，则按钮的高度减少约一半。
-                  // 这个当按钮嵌入添加的容器中时，非常有用
-                  isDense: false,
-                  iconSize: 30.0,
-                  /*style: TextStyle(
+        _defAction == actions[1]
+            ? Row(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Container(
+                        child: Center(
+                          child: Text('地址'),
+                        ),
+                        width: 60,
+                      )),
+                  Expanded(
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        items: [
+                          DropdownMenuItem(
+                            child: Text('==请选择=='),
+                            value: "",
+                          ),
+                          DropdownMenuItem(
+                            child: Text('北京市'),
+                            value: "北京市",
+                          ),
+                          DropdownMenuItem(
+                            child: Text('上海市'),
+                            value: "上海市",
+                          )
+                        ],
+                        hint: Text('请选择省份'),
+                        onChanged: (String val) {
+                          setState(() {
+                            _province = val;
+                          });
+                        },
+                        value: _province,
+                        //减少按钮的高度。
+                        // 默认情况下，此按钮的高度与其菜单项的高度相同。
+                        // 如果isDense为true，则按钮的高度减少约一半。
+                        // 这个当按钮嵌入添加的容器中时，非常有用
+                        isDense: false,
+                        iconSize: 30.0,
+                        /*style: TextStyle(
                       color: Colors.black,
                       backgroundColor: Colors.white,
                     ),*/
-                ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Container(
+                height: 0.0,
               ),
-            ),
-          ],
-        ) : Container(height: 0.0,),
         Row(
           children: <Widget>[
             Expanded(
@@ -289,6 +337,8 @@ class RegisterState extends State<RegisterClass> {
                     print('性别：$_gender');
                     print('地址：$_province');*/
                     Navigator.of(context).pushReplacementNamed("/");
+                    //修改登录状态
+
                   }
                 },
                 child: Text(
@@ -304,19 +354,32 @@ class RegisterState extends State<RegisterClass> {
             Expanded(
               child: Align(
                 alignment: Alignment.topRight,
-                child: FlatButton(onPressed: (){
-                  Navigator.of(context).pushReplacementNamed("/");
-                }, child: Text('跳过，点进去看看', style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline
-                ),)),
+                child: FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/");
+                    },
+                    child: Text(
+                      '跳过，点进去看看',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
+                    )),
               ),
             )
           ],
         ),
       ],
     );
+    /*Center(
+      child: Container(
+        width: 100.0,
+        height: 100.0,
+        child: FlatButton(onPressed: (){
+          Navigator.pop(context);
+        }, child: Text('您已登录，点击直接进入系统')),
+      ),
+    );*/
   }
 }

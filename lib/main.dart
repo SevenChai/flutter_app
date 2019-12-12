@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'services/LoginStore.dart';
+
+import 'demos/MainData.dart';
 
 import './demos/RandomWordDemo.dart';
 import './widgets/AlignClass.dart';
@@ -26,6 +28,8 @@ import './widgets/HorizScrollClass.dart';
 import './views/MainPage.dart';
 import './views/RegisterPage.dart';
 import './views/collect/BookClass.dart';
+import './views/notice/CallerPage.dart';
+import './views/notice/AnswerPage.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -35,10 +39,24 @@ void main() {
   return runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _myAppState();
+  }
+}
+class _myAppState extends State<MyApp>{
+  var _loginStoreOn;
+  bool isLogin = false;
+  /*_changeCount() {
+    setState(() {
+      print('mCount == ' + cartData.toString());
+    });
+  }*/
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     /*
     final wordPair = WordPair.random();
     return MaterialApp(
@@ -61,23 +79,34 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.blue, // 更改主题
       ),
-      home: new ListPage(),
+      home: Column(
+        children: <Widget>[
+          /*Container(
+            height: 50.0,
+            child: Row(
+             children: <Widget>[
+               FlatButton(onPressed: _changeCount, child: Text('点击修改共享数据', style: TextStyle(fontSize: 20, color: Colors.white, ),))
+             ],
+            ),
+          ),*/
+          Expanded(
+            child: ShareDataWidget(isLogin: isLogin, child: ListPage(),),
+          ),
+
+        ],
+      ),
       // 添加路由
       routes: <String, WidgetBuilder>{
         //页面
-        /* "/listPage": (BuildContext context) => new ListPage(),
-        "/collectPage": (BuildContext context) => new CollectPage(),
-        "/noticePage": (BuildContext context) => new NoticePage(),
-        "/accountPage": (BuildContext context) => new AccountPage(),*/
         "/register": (BuildContext context) => new RegisterClass(),
         "/bookDetailClass": (BuildContext context) => new BookIntroClass(),
 
         //Class Widget
         "/alignClass": (BuildContext context) =>
-            new AlignClassSevenor(), //对应的页面Class
+        new AlignClassSevenor(), //对应的页面Class
         "/randomWords": (BuildContext context) => new RandomWords(),
         "/containerClass": (BuildContext context) =>
-            new ContainerClassSevenor(),
+        new ContainerClassSevenor(),
         "/rowClass": (BuildContext context) => new RowClassSevenor(),
         "/columnClass": (BuildContext context) => new ColumnClassSevenor(),
         "/imageClass": (BuildContext context) => new ImageClassSevenor(),
@@ -88,13 +117,13 @@ class MyApp extends StatelessWidget {
         "/cusRadioClass": (BuildContext context) => new CustomRadioClass(),
         "/cusSwitchClass": (BuildContext context) => new CustomSwitchClass(),
         "/panelListsClass": (BuildContext context) =>
-            new RandomPanelListsClass(),
+        new RandomPanelListsClass(),
         "/chipClass": (BuildContext context) => new ChipClassSevenor(),
         "/dataTableClass": (BuildContext context) =>
-            new DataTableClassSevenor(),
+        new DataTableClassSevenor(),
         "/cardClass": (BuildContext context) => new CardClassSevenor(),
         "/listTitleClass": (BuildContext context) =>
-            new ListTitleClassSevenor(),
+        new ListTitleClassSevenor(),
         "/progressClass": (BuildContext context) => new ProgressClassSevenor(),
         "/stepperClass": (BuildContext context) => new StepperClassSevenor(),
         "/animationClass": (BuildContext context) => new AnimationClassSevenor(),
@@ -102,6 +131,16 @@ class MyApp extends StatelessWidget {
 
       },
     );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this._loginStoreOn  = loginEventBus.on<LoginStore>().listen((event){
+      setState(() {
+        isLogin = true;
+      });
+    });
   }
 }
 

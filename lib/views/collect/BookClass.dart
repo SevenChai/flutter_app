@@ -26,10 +26,17 @@ class BookIntroState extends State<BookIntroClass> {
           children: <Widget>[
             Container(
               height: 100.0,
-              child: Image.asset(
-                book.img,
-                fit: BoxFit.fitHeight,
-              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Expanded(
+                    child: Image.asset(
+                      book.img,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ],
+              )
             ),
             Align(
               alignment: Alignment.centerRight,

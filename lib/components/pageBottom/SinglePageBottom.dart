@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../demos/MainData.dart';
 
 class SingleBtnPageBottom extends StatefulWidget {
   @override
@@ -15,10 +16,18 @@ class SingleBtnPageBottomState extends State<SingleBtnPageBottom> {
     return FloatingActionButton(
       onPressed: () {
         //跳转到登录页面
-        Navigator.of(context).pushNamed('/register');
+        Navigator.pushNamed(context, '/register', arguments: {
+          'isLogin': ShareDataWidget.getData(context).isLogin,
+        });
       },
       tooltip: 'Register',
-      child: Text('登录'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('登录'),
+          Text('注册'),
+        ],
+      ),
     );
   }
 }
